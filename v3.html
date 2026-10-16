@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JustAgro — продаж зерна, закупівельні ціни</title>
+<meta name="description" content="Продайте врожай вигідно: актуальні закупівельні ціни, калькулятор з логістикою, швидка оплата.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
+<style>
+:root { --y: #F2C230; --y-d: #D9A915; --ink: #141414; --mut: #5E5E5E; --line: #E6E4DE; --soft: #F4F3EF; --white: #fff; --red: #E5484D; --green: #2E9E5B; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Montserrat, system-ui, sans-serif; color: var(--ink); background: var(--white); font-size: 16px; line-height: 1.5; }
+a { color: inherit; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+section { scroll-margin-top: 80px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 12px; border: 0; font: 700 15px Montserrat, sans-serif; text-decoration: none; cursor: pointer; transition: background-color .15s, transform .15s; }
+.btn--y { background: var(--y); color: var(--ink); }
+.btn--y:hover { background: var(--y-d); }
+.btn--k { background: var(--ink); color: #fff; }
+h2 { font-size: clamp(26px, 3.2vw, 38px); margin: 0 0 8px; font-weight: 800; letter-spacing: -.01em; }
+.sub { color: var(--mut); font-size: 14px; margin: 0 0 24px; }
+.sec { padding: 56px 0; }
+
+/* top */
+.topbar { font-size: 13px; color: var(--mut); border-bottom: 1px solid var(--line); }
+.topbar .wrap { display: flex; flex-wrap: wrap; gap: 6px 22px; padding-top: 8px; padding-bottom: 8px; align-items: center; }
+.topbar .sp { flex: 1; }
+.topbar b { color: var(--ink); }
+.hours { border: 1px solid var(--line); border-radius: 6px; padding: 1px 8px; }
+.hdr { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line); }
+.hdr .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 12px; padding-bottom: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 22px; letter-spacing: .02em; }
+.brand svg { width: 32px; height: 36px; color: var(--y-d); }
+.brand span b { color: var(--y-d); }
+.nav { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.nav a { text-decoration: none; font-size: 14px; font-weight: 700; padding: 9px 14px; border-radius: 10px; background: var(--soft); }
+.nav a:hover { background: var(--y); }
+
+/* hero */
+.hero .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding-top: 40px; padding-bottom: 32px; }
+.hero__t { flex: 1 1 440px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.hero h1 { margin: 0; font-size: clamp(34px, 4.6vw, 56px); line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
+.hero p { margin: 0; font-size: 18px; color: var(--mut); }
+.hero__v { flex: 1 1 480px; position: relative; min-height: 380px; }
+.hero__v svg.art { width: 100%; height: auto; display: block; }
+.tag { position: absolute; background: #fff; border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 30px rgba(0,0,0,.08); font-weight: 800; font-size: 15px; line-height: 1.25; max-width: 170px; display: flex; flex-direction: column; gap: 8px; }
+.tag i { width: 32px; height: 32px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-style: normal; }
+.tag i svg { width: 18px; height: 18px; }
+.tag--1 { left: 0; top: 6%; }
+.tag--2 { right: 0; bottom: 2%; }
+
+/* prices */
+.pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.pc { border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; transition: box-shadow .15s, border-color .15s; cursor: pointer; background: #fff; text-align: left; font-family: inherit; color: inherit; }
+.pc:hover { border-color: var(--y); box-shadow: 0 8px 22px rgba(0,0,0,.07); }
+.pc b { font-size: 15px; }
+.pc__v { display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 800; }
+.pc__v em { font-style: normal; font-size: 11px; font-weight: 800; color: #fff; background: var(--mut); border-radius: 999px; padding: 2px 7px; }
+.pc small { font-size: 12px; color: var(--mut); }
+
+/* chart */
+.chart { border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+.per { display: flex; justify-content: center; gap: 18px; margin-bottom: 14px; flex-wrap: wrap; }
+.per button { background: none; border: 0; font: 600 18px Montserrat, sans-serif; color: #9a9a9a; cursor: pointer; padding: 4px 2px; border-bottom: 2px solid transparent; }
+.per button.on { color: var(--ink); border-bottom-color: var(--ink); }
+.leg { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 10px; font-size: 13px; }
+.leg label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.leg input { width: 16px; height: 16px; }
+#chart { width: 100%; height: 320px; display: block; }
+.demo { font-size: 12px; color: var(--mut); margin-top: 8px; }
+
+/* steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) 1.1fr; gap: 14px; }
+.st { border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.st__n { display: flex; align-items: center; gap: 2px; font-size: 34px; font-weight: 800; }
+.st__n span { width: 44px; height: 44px; border-radius: 12px; background: var(--y); display: inline-flex; align-items: center; justify-content: center; margin-left: -10px; transform: rotate(-6deg); }
+.st__n span svg { width: 22px; height: 22px; }
+.st b { font-size: 18px; margin-top: 10px; }
+.st p { margin: 0; font-size: 13px; color: var(--mut); }
+.st--img { padding: 0; overflow: hidden; background: #ccc url("https://images.unsplash.com/photo-1530267981375-f0de937f5f13?w=700&q=60&auto=format&fit=crop") center / cover; min-height: 200px; }
+
+/* calc */
+.calc { background: var(--soft); border-radius: 24px; padding: 48px 20px; text-align: center; }
+.calc form { max-width: 440px; margin: 24px auto 0; text-align: left; display: flex; flex-direction: column; gap: 6px; }
+.calc label { font-size: 14px; font-weight: 700; margin-top: 8px; }
+.calc label i { color: var(--red); font-style: normal; }
+.calc input[type=text], .calc input[type=tel], .calc input[type=number], .calc select { width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 10px; font: 500 15px Montserrat, sans-serif; background: #fff; }
+.calc input:focus, .calc select:focus { outline: 2px solid var(--y); }
+.unit { position: relative; }
+.unit span { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--mut); }
+.vat { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.vat label { font-weight: 600; margin: 0; display: flex; gap: 10px; align-items: flex-start; }
+.vat small { display: block; font-size: 11px; color: var(--mut); font-weight: 500; }
+.calc .btn { margin-top: 18px; }
+.calc .note { font-size: 11px; color: var(--mut); text-align: center; margin-top: 10px; }
+.res { display: none; background: #fff; border: 2px solid var(--y); border-radius: 14px; padding: 16px; margin-top: 12px; font-size: 14px; }
+
+/* why */
+.why { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.wy { background: var(--soft); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 6px; }
+.wy svg { width: 100%; height: 130px; margin-bottom: 8px; }
+.wy b { font-size: 22px; }
+.wy p { margin: 0; font-size: 13px; color: var(--mut); }
+
+/* banner */
+.ban { background: var(--ink); color: #fff; border-radius: 20px; padding: 30px 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+.ban b { font-size: 20px; display: block; }
+.ban small { color: #BDBDBD; }
+
+/* faq */
+.faq { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq h2 { text-align: center; margin-bottom: 20px; }
+.faq details { background: var(--soft); border-radius: 16px; padding: 18px 22px; }
+.faq summary { list-style: none; cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 24px; line-height: 1; }
+.faq details[open] summary::after { content: "–"; }
+.faq p { margin: 12px 0 0; color: var(--mut); font-size: 14px; }
+
+/* footer */
+.ftr { background: var(--ink); color: #CFCFCF; margin-top: 56px; }
+.ftr .wrap { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.3fr; gap: 24px; padding-top: 40px; padding-bottom: 40px; font-size: 14px; }
+.ftr h4 { margin: 0 0 12px; color: #8C8C8C; font-size: 13px; font-weight: 600; }
+.ftr ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.ftr a { text-decoration: none; }
+.ftr a:hover { color: var(--y); }
+.ftr .brand { color: #fff; }
+.sub-box { border: 1px solid #3A3A3A; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.sub-box input { padding: 12px; border-radius: 10px; border: 0; font: 500 14px Montserrat, sans-serif; }
+.ph { font-size: 22px; font-weight: 800; color: #fff; }
+
+@media (max-width: 960px) {
+  .pgrid, .why { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .ftr .wrap { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .steps, .ftr .wrap { grid-template-columns: 1fr; }
+  .pc__v { font-size: 18px; }
+  .hero__v { min-height: 280px; }
+  .tag { font-size: 13px; max-width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <a href="./">Головна</a><a href="#faq">Про нас</a><a href="#why">Оплата та доставка</a>
+  <span class="sp"></span>
+  <b>+380 (XX) XXX-XX-XX</b><span class="hours">8:00 – 20:00</span>
+</div></div>
+
+<header class="hdr"><div class="wrap">
+  <a class="brand" href="v3.html" aria-label="JustAgro">
+    <svg viewBox="0 0 64 72" fill="currentColor" aria-hidden="true"><path d="M32 3 L60 19 V53 L32 69 L4 53 V19 Z" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/><path d="M32 61 V23" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><ellipse cx="32" cy="17" rx="3.6" ry="6.4"/><ellipse cx="26.6" cy="29" rx="3.5" ry="6.6" transform="rotate(-35 26.6 29)"/><ellipse cx="37.4" cy="29" rx="3.5" ry="6.6" transform="rotate(35 37.4 29)"/><ellipse cx="26.2" cy="39.5" rx="3.7" ry="7" transform="rotate(-35 26.2 39.5)"/><ellipse cx="37.8" cy="39.5" rx="3.7" ry="7" transform="rotate(35 37.8 39.5)"/><ellipse cx="25.8" cy="50" rx="3.8" ry="7.2" transform="rotate(-35 25.8 50)"/><ellipse cx="38.2" cy="50" rx="3.8" ry="7.2" transform="rotate(35 38.2 50)"/></svg>
+    <span>JUST<b>AGRO</b></span>
+  </a>
+  <nav class="nav" aria-label="Розділи"><a href="#prices">Ціни</a><a href="#dyn">Динаміка</a><a href="#calc">Калькулятор</a><a href="#faq">Питання</a></nav>
+  <a class="btn btn--k" href="tel:+380000000000">Подзвонити</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="hero__t">
+    <h1>Продайте свій врожай вигідно</h1>
+    <p>Дізнайтесь ціну за хвилину — вивезення беремо на себе.</p>
+    <a class="btn btn--y" href="#calc">Розрахувати ціну</a>
+  </div>
+  <div class="hero__v">
+    <svg class="art" viewBox="0 0 560 400" aria-hidden="true">
+      <ellipse cx="290" cy="350" rx="250" ry="26" fill="#F4F3EF"/>
+      <path d="M40 250 C 160 220 400 220 540 250 L 520 330 C 400 350 160 350 60 330 Z" fill="#E9E1C9"/>
+      <g transform="translate(110 170)">
+        <rect x="0" y="40" width="250" height="100" rx="10" fill="#C9C9C9"/>
+        <rect x="0" y="40" width="250" height="100" rx="10" fill="url(#gr)"/>
+        <path d="M10 40 C 60 -10 190 -10 240 40 Z" fill="#F2C230"/>
+        <g fill="#E3B23C"><circle cx="70" cy="22" r="4"/><circle cx="110" cy="12" r="4"/><circle cx="150" cy="14" r="4"/><circle cx="190" cy="24" r="4"/></g>
+        <path d="M250 70 H318 L356 112 V140 H250 Z" fill="#F2C230"/>
+        <path d="M262 78 H312 L336 106 H262 Z" fill="#9FC6E0"/>
+        <rect x="250" y="126" width="106" height="14" fill="#D9A915"/>
+        <circle cx="60" cy="146" r="24" fill="#1F1F1F"/><circle cx="60" cy="146" r="10" fill="#9A9A9A"/>
+        <circle cx="180" cy="146" r="24" fill="#1F1F1F"/><circle cx="180" cy="146" r="10" fill="#9A9A9A"/>
+        <circle cx="310" cy="146" r="24" fill="#1F1F1F"/><circle cx="310" cy="146" r="10" fill="#9A9A9A"/>
+        <text x="30" y="100" font-family="Montserrat" font-weight="800" font-size="26" fill="#141414">JUSTAGRO</text>
+      </g>
+      <defs><linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+    </svg>
+    <div class="tag tag--1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></i>Ціна з урахуванням логістики</div>
+    <div class="tag tag--2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></i>Чесні умови в договорі</div>
+  </div>
+</div></section>
+
+<section class="sec" id="prices"><div class="wrap">
+  <h2>Актуальні закупівельні ціни на зерно</h2>
+  <p class="sub">Базис: [базис поставки] · на [дата]</p>
+  <div class="pgrid" id="pgrid"></div>
+</div></section>
+
+<section class="sec" id="dyn"><div class="wrap">
+  <h2>Динаміка цін по культурах</h2>
+  <p class="sub">Середня закупівельна ціна у часі, ₴/т</p>
+  <div class="chart">
+    <div class="per" id="per"><button type="button" data-d="7">7 днів</button><button type="button" data-d="30" class="on">1 місяць</button><button type="button" data-d="180">6 місяців</button><button type="button" data-d="365">1 рік</button></div>
+    <div class="leg" id="leg"></div>
+    <svg id="chart" viewBox="0 0 1000 320" preserveAspectRatio="none" role="img" aria-label="Графік динаміки цін"></svg>
+    <div class="demo">Демо-дані для показу. Після підключення тут будуть ваші реальні ціни.</div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>Як це працює?</h2>
+  <p class="sub">Три кроки від дзвінка до оплати</p>
+  <div class="steps">
+    <div class="st"><div class="st__n">1<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span></div><b>Отримуєте ціну</b><p>Рахуєте онлайн з урахуванням вивезення з вашого господарства.</p></div>
+    <div class="st"><div class="st__n">2<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M9 15l2 2 4-4"/></svg></span></div><b>Погоджуємо умови</b><p>Фіксуємо ціну та підписуємо договір.</p></div>
+    <div class="st"><div class="st__n">3<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h13v10H2zM15 10h4l3 3v4h-7"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span></div><b>Відвантажуєте</b><p>Забираємо зерно і швидко платимо після поставки.</p></div>
+    <div class="st st--img" role="img" aria-label="Збирання врожаю"></div>
+  </div>
+</div></section>
+
+<section class="sec" id="calc"><div class="wrap">
+  <div class="calc">
+    <h2>Калькулятор ціни JustAgro</h2>
+    <p class="sub" style="margin:0">Розрахунок найкращої ціни для фермера з урахуванням вивезення від господарства</p>
+    <form id="calcForm">
+      <label for="cCrop">Культура<i>*</i></label>
+      <select id="cCrop" required></select>
+      <label for="cLoc">Локація продавця<i>*</i></label>
+      <input id="cLoc" type="text" placeholder="Введіть населений пункт…" required>
+      <label for="cVol">Обсяг<i>*</i></label>
+      <div class="unit"><input id="cVol" type="number" min="1" placeholder="Наприклад, 48" required><span>т</span></div>
+      <label for="cName">Ім'я<i>*</i></label>
+      <input id="cName" type="text" placeholder="Введіть своє ім'я" required>
+      <label for="cPhone">Номер телефону<i>*</i></label>
+      <input id="cPhone" type="tel" placeholder="+380" required>
+      <label>Форма продажу</label>
+      <div class="vat">
+        <label><input type="radio" name="vat" value="vat" checked><span>З ПДВ<small>юридична особа / ФОП — платник ПДВ</small></span></label>
+        <label><input type="radio" name="vat" value="novat"><span>Без ПДВ</span></label>
+      </div>
+      <button class="btn btn--y" type="submit">Розрахувати ціну</button>
+      <div class="res" id="res"></div>
+      <div class="note">Натискаючи кнопку, ви погоджуєтеся на обробку персональних даних</div>
+    </form>
+  </div>
+</div></section>
+
+<section class="sec" id="why"><div class="wrap">
+  <h2>Чому обирають нас</h2>
+  <p class="sub">Працюємо з господарствами будь-якого розміру</p>
+  <div class="why">
+    <div class="wy"><svg viewBox="0 0 200 130" aria-hidden="true"><rect x="62" y="10" width="76" height="110" rx="12" fill="#3A3A3A"/><rect x="72" y="22" width="56" height="24" rx="4" fill="#9FD3A8"/><g fill="#F2C230"><rect x="72" y="54" width="16" height="14" rx="3"/><rect x="92" y="54" width="16" height="14" rx="3"/><rect x="112" y="54" width="16" height="14" rx="3"/><rect x="72" y="74" width="16" height="14" rx="3"/><rect x="92" y="74" width="16" height="14" rx="3"/><rect x="112" y="74" width="16" height="14" rx="3"/><rect x="72" y="94" width="16" height="14" rx="3"/><rect x="92" y="94" width="36" height="14" rx="3"/></g></svg><b>Швидкість</b><p>Ціну з урахуванням вивезення рахуємо одразу</p></div>
+    <div class="wy"><svg viewBox="0 0 200 130" aria-hidden="true"><circle cx="100" cy="65" r="52" fill="#F2C230"/><circle cx="100" cy="65" r="40" fill="none" stroke="#D9A915" stroke-width="4"/><text x="100" y="84" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="54" fill="#141414">₴</text></svg><b>Ціни</b><p>Оптимальна ціна з урахуванням логістики</p></div>
+    <div class="wy"><svg viewBox="0 0 200 130" aria-hidden="true"><path d="M20 50 H120 V100 H20 Z" fill="#F2C230"/><path d="M28 50 C 50 20 92 20 112 50 Z" fill="#E3B23C"/><path d="M120 64 H156 L180 88 V100 H120 Z" fill="#3A3A3A"/><rect x="128" y="70" width="22" height="14" rx="2" fill="#9FC6E0"/><circle cx="48" cy="106" r="13" fill="#1F1F1F"/><circle cx="150" cy="106" r="13" fill="#1F1F1F"/></svg><b>Доставка</b><p>Швидкий вивіз вашого врожаю</p></div>
+    <div class="wy"><svg viewBox="0 0 200 130" aria-hidden="true"><rect x="36" y="26" width="128" height="84" rx="14" fill="#7A4A2E"/><rect x="36" y="44" width="128" height="14" fill="#5B3520"/><rect x="118" y="66" width="46" height="26" rx="8" fill="#A0663F"/><circle cx="134" cy="79" r="5" fill="#F2C230"/></svg><b>Оплата</b><p>Своєчасна оплата за поставлену продукцію</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="ban"><div><b>Розрахуємо вашу ціну індивідуально</b><small>Для великих обсягів і нестандартних умов</small></div><a class="btn btn--y" href="#calc">Залишити заявку</a></div>
+</div></section>
+
+<section class="sec" id="faq"><div class="wrap faq">
+  <h2>Поширені питання</h2>
+  <details open><summary>Від чого залежить ціна на моє зерно?</summary><p>Ціна залежить від ринку, якості зерна, обсягу партії та відстані до вашого господарства. Ми називаємо ціну вже з урахуванням вивезення, щоб ви бачили суму «на руки».</p></details>
+  <details><summary>Які вимоги до якості?</summary><p>[Ваші вимоги: вологість, сміттєва домішка, клас, протеїн. Знижки за відхилення погоджуємо до відвантаження.]</p></details>
+  <details><summary>Який мінімальний обсяг?</summary><p>[Ваш мінімальний обсяг, наприклад від однієї машини.]</p></details>
+  <details><summary>Хто вивозить зерно?</summary><p>Ми подаємо власний транспорт або ви привозите зерно на нашу прийомку — як вам зручніше.</p></details>
+  <details><summary>Коли я отримаю гроші?</summary><p>[Ваші умови оплати.] Усі строки фіксуються в договорі.</p></details>
+</div></section>
+
+<footer class="ftr"><div class="wrap">
+  <div><a class="brand" href="v3.html"><span>JUST<b style="color:#F2C230">AGRO</b></span></a><p style="margin:10px 0 0">Закупівля зернових і олійних</p></div>
+  <div><h4>Компанія</h4><ul><li><a href="./">Сайт 1</a></li><li><a href="v2.html">Сайт 2</a></li><li><a href="#faq">Питання</a></li></ul></div>
+  <div><h4>Фермерам</h4><ul><li><a href="#prices">Ціни</a></li><li><a href="#calc">Калькулятор</a></li><li><a href="#why">Оплата та доставка</a></li></ul></div>
+  <div class="sub-box"><b style="color:#fff">Телефон по Україні</b><a class="ph" href="tel:+380000000000">+380 (XX) XXX-XX-XX</a><span>[email] · щодня 8:00 – 20:00</span></div>
+</div></footer>
+
+<script>
+(function () {
+  var crops = [
+    { n: 'Пшениця 4 клас', c: '#E3A21A' }, { n: 'Кукурудза', c: '#2E9E5B' }, { n: 'Ячмінь', c: '#2F6FD6' },
+    { n: 'Пшениця 3 клас', c: '#C43B6A' }, { n: 'Пшениця 2 клас', c: '#8E44C9' }, { n: 'Соняшник', c: '#1AA3A3' },
+    { n: 'Соя', c: '#C98A1A' }, { n: 'Ріпак', c: '#B23A48' }
+  ];
+  var base = [5600, 5650, 5800, 6650, 6770, 16400, 17550, 20150];
+
+  // price cards (placeholders)
+  var g = document.getElementById('pgrid');
+  crops.forEach(function (cr) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'pc';
+    b.innerHTML = '<b>' + cr.n + '</b><span class="pc__v">[ціна] <em>±</em></span><small>₴ / т</small>';
+    b.addEventListener('click', function () { document.getElementById('cCrop').value = cr.n; location.hash = '#calc'; });
+    g.appendChild(b);
+  });
+  var sel = document.getElementById('cCrop');
+  crops.forEach(function (cr) { var o = document.createElement('option'); o.textContent = cr.n; sel.appendChild(o); });
+
+  // demo chart
+  var days = 30, on = crops.map(function () { return true; });
+  function series(i, n) {
+    var s = [], v = base[i], seed = i * 97 + 13;
+    for (var k = 0; k < n; k++) { seed = (seed * 9301 + 49297) % 233280; v += (seed / 233280 - 0.5) * base[i] * 0.012; s.push(v); }
+    return s;
+  }
+  var svg = document.getElementById('chart'), NS = 'http://www.w3.org/2000/svg';
+  function draw() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var n = Math.min(days, 60), W = 1000, H = 320, L = 60, B = 290, T = 10;
+    var all = []; var data = crops.map(function (c, i) { var s = series(i, n); if (on[i]) all = all.concat(s); return s; });
+    if (!all.length) return;
+    var mn = Math.min.apply(null, all) * 0.97, mx = Math.max.apply(null, all) * 1.02;
+    for (var gl = 0; gl <= 4; gl++) {
+      var y = T + (B - T) * gl / 4, val = Math.round(mx - (mx - mn) * gl / 4);
+      var ln = document.createElementNS(NS, 'line'); ln.setAttribute('x1', L); ln.setAttribute('x2', W); ln.setAttribute('y1', y); ln.setAttribute('y2', y); ln.setAttribute('stroke', '#ECEAE4'); svg.appendChild(ln);
+      var tx = document.createElementNS(NS, 'text'); tx.setAttribute('x', 4); tx.setAttribute('y', y + 4); tx.setAttribute('font-size', '12'); tx.setAttribute('fill', '#8a8a8a'); tx.textContent = val.toLocaleString('uk-UA'); svg.appendChild(tx);
+    }
+    data.forEach(function (s, i) {
+      if (!on[i]) return;
+      var d = s.map(function (v, k) { return (k ? 'L' : 'M') + (L + (W - L) * k / (n - 1)).toFixed(1) + ' ' + (T + (B - T) * (mx - v) / (mx - mn)).toFixed(1); }).join(' ');
+      var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', crops[i].c); p.setAttribute('stroke-width', '2.2'); p.setAttribute('vector-effect', 'non-scaling-stroke'); svg.appendChild(p);
+    });
+  }
+  var leg = document.getElementById('leg');
+  crops.forEach(function (cr, i) {
+    var l = document.createElement('label');
+    l.innerHTML = '<input type="checkbox" checked style="accent-color:' + cr.c + '">' + cr.n;
+    l.querySelector('input').addEventListener('change', function (e) { on[i] = e.target.checked; draw(); });
+    leg.appendChild(l);
+  });
+  document.querySelectorAll('#per button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#per button').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on'); days = +b.getAttribute('data-d'); draw();
+    });
+  });
+  draw();
+
+  document.getElementById('calcForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var r = document.getElementById('res');
+    r.innerHTML = '<b>Дякуємо!</b> Заявку на ' + sel.value.toLowerCase() + ', ' + document.getElementById('cVol').value + ' т прийнято. Менеджер передзвонить з точною ціною.<br><small>Це тестовий сайт: форма ще не підключена, тож краще зателефонуйте нам.</small>';
+    r.style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>
