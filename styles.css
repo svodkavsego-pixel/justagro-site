@@ -224,5 +224,5 @@ button.btn { border: 0; cursor: pointer; font-family: Montserrat, system-ui, san
   background: #D4A945; color: #0F0E0C; font: 800 16px Montserrat, sans-serif;
   border: 3px solid #0F0E0C; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-sizing: border-box;
 }
-.pin-icon span { line-height: 1; }
+.pin-icon b { transform: rotate(45deg); line-height: 1; }
 .leaflet-popup-content { font: 500 15px Montserrat, sans-serif; }
