@@ -289,23 +289,29 @@
   <script>
     (function () {
       if (!window.L) return;
-      var pts = [
-        { n: 1, name: '[Назва прийомки 1]', addr: '[Адреса] · Чернігів', ll: [51.4982, 31.2893] },
-        { n: 2, name: '[Назва прийомки 2]', addr: '[Адреса] · Ніжин', ll: [51.0480, 31.8869] }
-      ];
       var box = document.getElementById('map');
       box.innerHTML = '';
       var map = L.map(box, { scrollWheelZoom: false });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap' }).addTo(map);
-      var all = [];
-      pts.forEach(function (p) {
-        var icon = L.divIcon({ className: 'pin-icon', html: '<span><b>' + p.n + '</b></span>', iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -34] });
-        L.marker(p.ll, { icon: icon }).addTo(map).bindPopup('<b>' + p.name + '</b><br>' + p.addr);
-        all.push(p.ll);
-      });
-      map.fitBounds(all, { padding: [60, 60] });
-      window.addEventListener('hashchange', function () { setTimeout(function () { map.invalidateSize(); map.fitBounds(all, { padding: [60, 60] }); }, 60); });
+      var layer = L.layerGroup().addTo(map), all = [];
+      function fit() { if (all.length) map.fitBounds(all, { padding: [60, 60], maxZoom: 11 }); }
+      window.JA_renderPoints = function (pts) {
+        layer.clearLayers(); all = [];
+        pts.forEach(function (p) {
+          var icon = L.divIcon({ className: 'pin-icon', html: '<span><b>' + p.n + '</b></span>', iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -34] });
+          var esc = function (s) { return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); };
+          L.marker(p.ll, { icon: icon }).addTo(layer).bindPopup('<b>' + esc(p.name) + '</b><br>' + esc(p.addr));
+          all.push(p.ll);
+        });
+        fit();
+      };
+      window.JA_renderPoints([
+        { n: 1, name: '[Назва прийомки 1]', addr: '[Адреса] · Чернігів', ll: [51.4982, 31.2893] },
+        { n: 2, name: '[Назва прийомки 2]', addr: '[Адреса] · Ніжин', ll: [51.0480, 31.8869] }
+      ]);
+      window.addEventListener('hashchange', function () { setTimeout(function () { map.invalidateSize(); fit(); }, 60); });
     })();
   </script>
+  <script src="content.js?v=1"></script>
 </body>
 </html>
