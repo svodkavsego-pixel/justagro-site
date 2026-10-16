@@ -11,7 +11,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <header class="top">
@@ -63,6 +64,58 @@
           <li><a class="crop" href="#prices" data-crop="Пшениця">Пшениця <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Кукурудза">Кукурудза <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Соняшник">Соняшник <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Соя">Соя <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Ячмінь">Ячмінь <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Ріпак">Ріпак <span aria-hidden="true">→</span></a></li>
         </ul>
         <p class="center"><a class="btn btn--line" href="#prices">Подивитися ціни</a></p>
+      </div>
+
+      <div class="wrap block" id="delivery">
+        <div class="eyebrow">Варіанти поставки</div>
+        <h2 class="h2-left">Як вам зручно — так і приймемо</h2>
+        <div class="delivery">
+          <div class="delivery__opts">
+            <div class="opt">
+              <svg class="opt__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 42V20l9-6 9 6v22"/><path d="M24 42V12l9-6 9 6v30"/><path d="M4 42h40"/><path d="M11 28h8M11 34h8M29 20h8M29 27h8M29 34h8"/></svg>
+              <h3>На прийомках</h3>
+              <p class="muted">Привозите зерно своїм транспортом на одну з наших прийомок. Зважимо й перевіримо якість при вас.</p>
+              <a class="more" href="#points">Список прийомок <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="opt">
+              <svg class="opt__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h26v22H3z"/><path d="M29 18h9l7 8v8H29"/><circle cx="11" cy="37" r="4"/><circle cx="37" cy="37" r="4"/><path d="M33 22h4l3 4h-7z"/></svg>
+              <h3>З господарства нашим транспортом</h3>
+              <p class="muted">Заберемо зерно прямо з поля чи току. Власні машини, зручний графік, погодження за обсягом.</p>
+              <a class="more" href="#contacts">Замовити машину <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <svg class="delivery__art" viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" rx="22" class="art__sky"/>
+            <circle cx="320" cy="80" r="38" class="art__sun"/>
+            <path d="M0 190 C 120 170 300 176 420 160 V300 H0 Z" class="art__field"/>
+            <path d="M0 230 C 130 214 300 220 420 206" class="art__row"/>
+            <path d="M0 262 C 130 248 300 254 420 242" class="art__row"/>
+            <g transform="translate(60 128)">
+              <rect x="0" y="22" width="200" height="72" rx="6" class="art__body"/>
+              <path d="M200 40 H262 L298 76 V94 H200 Z" class="art__cab"/>
+              <rect x="218" y="48" width="36" height="22" rx="3" class="art__glass"/>
+              <path d="M8 22 C 50 -8 150 -8 192 22 Z" class="art__grain"/>
+              <circle cx="48" cy="100" r="18" class="art__wheel"/><circle cx="150" cy="100" r="18" class="art__wheel"/><circle cx="258" cy="100" r="18" class="art__wheel"/>
+              <text x="22" y="66" class="art__text">JUSTAGRO</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="wrap block" id="points">
+        <div class="points">
+          <div class="points__text">
+            <div class="eyebrow">Наші прийомки</div>
+            <h2 class="h2-left">Куди можна привезти зерно</h2>
+            <p class="muted">Дві прийомки, куди можна везти зерно своїм транспортом. Перед поїздкою зателефонуйте — узгодимо ціну й час.</p>
+            <ul class="points__list">
+              <li><span class="pin">1</span><div><b>[Назва прийомки 1]</b><br><span class="muted">[Адреса] · Чернігів</span></div></li>
+              <li><span class="pin">2</span><div><b>[Назва прийомки 2]</b><br><span class="muted">[Адреса] · Ніжин</span></div></li>
+            </ul>
+            <a class="btn btn--line" href="tel:+380000000000">Узгодити привіз</a>
+          </div>
+          <div class="points__map" id="map" role="region" aria-label="Карта прийомок"><span>Карта завантажується…</span></div>
+        </div>
       </div>
 
       <div class="wrap block">
@@ -197,6 +250,7 @@
       document.querySelectorAll('.prices a[href="#contacts"]').forEach(function (a) { a.addEventListener('click', function () { var f = document.getElementById('fCrop'); f.value = a.closest('tr').cells[0].textContent + ', '; }); });
       function show() {
         var id = (location.hash || '#home').slice(1);
+        var anchor = pages.indexOf(id) < 0 ? document.getElementById(id) : null;
         if (pages.indexOf(id) < 0) id = 'home';
         document.querySelectorAll('.page').forEach(function (p) { p.hidden = p.getAttribute('data-page') !== id; });
         document.querySelectorAll('.tabs__link').forEach(function (a) {
@@ -204,7 +258,7 @@
           a.classList.toggle('is-active', on);
           if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
         });
-        window.scrollTo(0, 0);
+        if (anchor) anchor.scrollIntoView(); else window.scrollTo(0, 0);
         document.querySelectorAll('.prices tr[data-crop]').forEach(function (r) { r.classList.toggle('is-hl', id === 'prices' && r.getAttribute('data-crop') === picked); });
         var hl = document.querySelector('.prices tr.is-hl');
         if (hl) hl.scrollIntoView({ block: 'center' });
@@ -222,6 +276,28 @@
         e.preventDefault();
         document.getElementById('leadMsg').hidden = false;
       });
+    })();
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      if (!window.L) return;
+      var pts = [
+        { n: 1, name: '[Назва прийомки 1]', addr: '[Адреса] · Чернігів', ll: [51.4982, 31.2893] },
+        { n: 2, name: '[Назва прийомки 2]', addr: '[Адреса] · Ніжин', ll: [51.0480, 31.8869] }
+      ];
+      var box = document.getElementById('map');
+      box.innerHTML = '';
+      var map = L.map(box, { scrollWheelZoom: false });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap' }).addTo(map);
+      var all = [];
+      pts.forEach(function (p) {
+        var icon = L.divIcon({ className: 'pin-icon', html: '<span>' + p.n + '</span>', iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -34] });
+        L.marker(p.ll, { icon: icon }).addTo(map).bindPopup('<b>' + p.name + '</b><br>' + p.addr);
+        all.push(p.ll);
+      });
+      map.fitBounds(all, { padding: [60, 60] });
+      window.addEventListener('hashchange', function () { setTimeout(function () { map.invalidateSize(); map.fitBounds(all, { padding: [60, 60] }); }, 60); });
     })();
   </script>
 </body>
