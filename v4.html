@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Just Agro Pride — закупівля зерна, логістика, поставки в порти</title>
+<meta name="description" content="Закупівля зернових і олійних культур, власний автопарк, прямі поставки в порти.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Fira+Sans+Condensed:wght@600;700&display=swap">
+<style>
+:root { --g: #2D5A27; --g2: #4C8A2E; --y: #F0B323; --y-d: #D99B0E; --ink: #1B2118; --mut: #5D6559; --line: #E3E6DF; --dark: #1D2520; --soft: #F5F6F2; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: "Fira Sans", system-ui, sans-serif; color: var(--ink); background: #fff; font-size: 16px; line-height: 1.5; }
+a { color: inherit; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+section { scroll-margin-top: 84px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 8px; font: 600 15px "Fira Sans", sans-serif; text-decoration: none; border: 0; cursor: pointer; transition: background-color .15s; }
+.btn::after { content: "›"; font-size: 20px; line-height: 1; }
+.btn--y { background: var(--y); color: var(--ink); }
+.btn--y:hover { background: var(--y-d); }
+.btn--line { border: 1.5px solid rgba(255,255,255,.75); color: #fff; padding: 10px 18px; font-size: 14px; }
+.btn--line:hover { background: rgba(255,255,255,.12); }
+h2 { font-family: "Fira Sans Condensed", sans-serif; font-weight: 700; font-size: clamp(24px, 2.6vw, 32px); margin: 0 0 16px; }
+
+/* header */
+.hdr { position: sticky; top: 0; z-index: 20; background: #fff; box-shadow: 0 1px 0 var(--line); }
+.hdr .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 12px; padding-bottom: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo svg { width: 42px; height: 48px; }
+.logo b { display: block; font-family: "Fira Sans Condensed", sans-serif; font-size: 26px; line-height: 1; letter-spacing: .02em; color: var(--ink); }
+.logo small { display: block; text-align: center; font-size: 10px; letter-spacing: .4em; color: var(--mut); margin-top: 3px; }
+.nav { flex: 1; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+.nav a { text-decoration: none; color: #3B4237; }
+.nav a:hover { color: var(--g2); }
+.tel { display: flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none; }
+.tel svg { width: 18px; height: 18px; }
+.lang { display: flex; gap: 10px; font-size: 13px; color: var(--mut); }
+.lang b { color: var(--ink); border-bottom: 2px solid var(--y); }
+
+/* hero */
+.hero { position: relative; color: #fff; background: #2a2416 url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2000&q=70&auto=format&fit=crop") center 65% / cover no-repeat; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,18,12,.78) 0%, rgba(14,18,12,.35) 50%, rgba(14,18,12,.6) 100%); }
+.hero .wrap { position: relative; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; min-height: 440px; padding-top: 48px; padding-bottom: 48px; }
+.hero__t { flex: 1 1 520px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.hero h1 { margin: 0; font-family: "Fira Sans Condensed", sans-serif; font-weight: 700; font-size: clamp(30px, 3.8vw, 46px); line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
+.hero h1 span { display: block; font-size: .78em; }
+.hero p { margin: 0; font-size: 18px; color: #EEF0EA; max-width: 520px; }
+.feats { flex: 0 1 290px; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.feats li { display: flex; gap: 14px; align-items: center; font-size: 14px; }
+.feats svg { width: 34px; height: 34px; color: var(--y); flex-shrink: 0; }
+
+/* grid */
+.grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; padding-top: 24px; padding-bottom: 24px; }
+.crops h2 { font-size: 22px; margin-bottom: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.tile { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; text-align: center; background: #fff; text-decoration: none; transition: box-shadow .15s, transform .15s; }
+.tile:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.1); }
+.tile svg { display: block; width: 100%; height: 86px; }
+.tile b { display: block; font-size: 14px; font-weight: 500; padding: 8px 4px 0; }
+.tile small { display: block; font-size: 11px; color: var(--mut); padding-bottom: 8px; min-height: 22px; }
+.dcard { position: relative; overflow: hidden; border-radius: 6px; color: #fff; background: var(--dark); min-height: 150px; padding: 24px; display: flex; flex-direction: column; justify-content: center; gap: 10px; align-items: flex-start; }
+.dcard > * { position: relative; }
+.dcard h3 { margin: 0; font-size: 20px; }
+.dcard p { margin: 0; font-size: 14px; color: #DDE2D8; max-width: 260px; }
+.dcard--fleet { background: #1d2520 url("https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=900&q=60&auto=format&fit=crop") right center / cover; }
+.dcard--fleet::before, .dcard--port::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,26,22,.95) 0%, rgba(20,26,22,.75) 45%, rgba(20,26,22,.05) 100%); }
+.dcard--port { background: #1d2520; }
+.dcard--port svg.art { position: absolute; right: 0; bottom: 0; height: 100%; width: auto; max-width: 70%; }
+.slogan { border: 1px solid var(--line); border-radius: 6px; padding: 22px 26px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+.slogan p { margin: 0; display: flex; gap: 14px; align-items: center; font-weight: 600; font-size: 16px; }
+.slogan p svg { width: 30px; height: 30px; flex-shrink: 0; }
+.slogan .logo { align-self: flex-end; }
+
+/* about/services */
+.sec { padding: 56px 0; }
+.soft { background: var(--soft); }
+.two { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; }
+.two > * { flex: 1 1 420px; }
+.lead { font-size: 18px; color: var(--mut); margin: 0 0 18px; }
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.num { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+.num b { display: block; font-family: "Fira Sans Condensed", sans-serif; font-size: 28px; color: var(--g); }
+.num span { font-size: 13px; color: var(--mut); }
+.svc { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.sv { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.sv svg { width: 40px; height: 40px; color: var(--g2); }
+.sv b { font-size: 17px; }
+.sv p { margin: 0; font-size: 14px; color: var(--mut); }
+
+/* contacts */
+.contact { display: flex; flex-wrap: wrap; gap: 28px; }
+.contact > div { flex: 1 1 340px; display: flex; flex-direction: column; gap: 10px; }
+.contact .big { font-family: "Fira Sans Condensed", sans-serif; font-size: 32px; font-weight: 700; text-decoration: none; }
+form { flex: 1 1 420px; background: var(--dark); color: #fff; border-radius: 10px; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+form h3 { grid-column: 1 / -1; margin: 0 0 4px; font-size: 22px; }
+form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #C9D0C4; }
+form .full { grid-column: 1 / -1; }
+form input, form select { padding: 12px; border-radius: 6px; border: 1px solid #3A453C; background: #263029; color: #fff; font: 500 15px "Fira Sans", sans-serif; }
+form input:focus, form select:focus { outline: 2px solid var(--y); }
+form .btn { grid-column: 1 / -1; justify-content: center; }
+.ok { grid-column: 1 / -1; display: none; background: #2F3D33; border-radius: 6px; padding: 10px 12px; font-size: 14px; }
+
+footer { background: #141a16; color: #AEB6AA; font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; padding-top: 26px; padding-bottom: 26px; }
+footer .logo b { color: #fff; }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+footer nav a { text-decoration: none; }
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: 1fr; }
+  .svc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .nums { grid-template-columns: 1fr; }
+  .svc { grid-template-columns: 1fr; }
+  form { grid-template-columns: 1fr; }
+  .nav { order: 3; flex-basis: 100%; gap: 6px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hdr"><div class="wrap">
+  <a class="logo" href="v4.html" aria-label="Just Agro Pride">
+    <svg viewBox="0 0 48 56" aria-hidden="true"><path d="M24 54 C 24 40 24 26 24 8" stroke="#2D5A27" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M24 50 C 8 46 4 30 6 18 C 18 24 24 36 24 50 Z" fill="#2D5A27"/><path d="M24 50 C 40 46 44 30 42 18 C 30 24 24 36 24 50 Z" fill="#F0B323"/><path d="M24 34 C 14 30 12 18 14 8 C 22 14 25 24 24 34 Z" fill="#4C8A2E"/><path d="M24 34 C 34 30 36 18 34 8 C 26 14 23 24 24 34 Z" fill="#D99B0E"/></svg>
+    <span><b>JUST AGRO</b><small>PRIDE</small></span>
+  </a>
+  <nav class="nav" aria-label="Розділи"><a href="#about">Про компанію</a><a href="#crops">Закупівля зерна</a><a href="#services">Логістика</a><a href="#fleet">Наш автопарк</a><a href="#port">Портові поставки</a><a href="#contacts">Контакти</a></nav>
+  <a class="tel" href="tel:+380000000000"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>+380 (XX) XXX-XX-XX</a>
+  <div class="lang"><b>UA</b><span>EN</span></div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="hero__t">
+    <h1>JUST AGRO PRIDE —<span>закупівля зерна, логістика, поставки в порти</span></h1>
+    <p>Сільське господарство — це не просто бізнес. Це наша відповідальність перед майбутнім.</p>
+    <a class="btn btn--y" href="#contacts">Зв'язатися з нами</a>
+  </div>
+  <ul class="feats">
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 30V10"/><path d="M16 10c-4-2-5-6-3-9 4 2 5 6 3 9zM16 17c-4-1-7-4-7-8 4 0 7 4 7 8zM16 17c4-1 7-4 7-8-4 0-7 4-7 8zM16 24c-4-1-7-4-7-8 4 0 7 4 7 8zM16 24c4-1 7-4 7-8-4 0-7 4-7 8z"/></svg>Закупівля зернових та олійних культур</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h18v14H2zM20 12h6l4 5v5H20"/><circle cx="8" cy="24" r="2.5"/><circle cx="24" cy="24" r="2.5"/></svg>Власний автопарк та логістика</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="6" r="3"/><path d="M16 9v20M9 14h14M5 20c0 5 5 9 11 9s11-4 11-9"/></svg>Поставки в порти</li>
+    <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 14l6-6 5 3 4-2 6 3 7 0M8 8l-3 10 6 6c1 1 3 1 4 0l7-7M14 22l3 3M17 19l3 3"/></svg>Робота з посередниками</li>
+  </ul>
+</div></section>
+
+<div class="wrap grid">
+  <div class="crops" id="crops">
+    <h2>Культури, з якими працюємо</h2>
+    <div class="tiles">
+      <a class="tile" href="#contacts" data-crop="Пшениця"><svg viewBox="0 0 120 86" aria-hidden="true"><rect width="120" height="86" fill="#E9D9A6"/><g stroke="#B88A2E" stroke-width="2" fill="#D9A84A"><path d="M40 86V30" fill="none"/><ellipse cx="40" cy="26" rx="4" ry="8"/><ellipse cx="34" cy="38" rx="4" ry="8" transform="rotate(-30 34 38)"/><ellipse cx="46" cy="38" rx="4" ry="8" transform="rotate(30 46 38)"/><ellipse cx="34" cy="52" rx="4" ry="8" transform="rotate(-30 34 52)"/><ellipse cx="46" cy="52" rx="4" ry="8" transform="rotate(30 46 52)"/><path d="M80 86V24" fill="none"/><ellipse cx="80" cy="20" rx="4" ry="8"/><ellipse cx="74" cy="32" rx="4" ry="8" transform="rotate(-30 74 32)"/><ellipse cx="86" cy="32" rx="4" ry="8" transform="rotate(30 86 32)"/><ellipse cx="74" cy="46" rx="4" ry="8" transform="rotate(-30 74 46)"/><ellipse cx="86" cy="46" rx="4" ry="8" transform="rotate(30 86 46)"/></g></svg><b>Пшениця</b><small>2–3 клас</small></a>
+      <a class="tile" href="#contacts" data-crop="Кукурудза"><svg viewBox="0 0 120 86" aria-hidden="true"><rect width="120" height="86" fill="#CFE3B0"/><path d="M30 86 C 40 50 50 30 56 20" stroke="#5E9A32" stroke-width="10" fill="none" stroke-linecap="round"/><ellipse cx="66" cy="44" rx="15" ry="32" fill="#F2C230" transform="rotate(20 66 44)"/><g fill="#E0A818" transform="rotate(20 66 44)"><circle cx="60" cy="24" r="3"/><circle cx="68" cy="24" r="3"/><circle cx="60" cy="34" r="3"/><circle cx="68" cy="34" r="3"/><circle cx="60" cy="44" r="3"/><circle cx="68" cy="44" r="3"/><circle cx="60" cy="54" r="3"/><circle cx="68" cy="54" r="3"/><circle cx="60" cy="64" r="3"/><circle cx="68" cy="64" r="3"/></g><path d="M78 86 C 84 60 90 40 100 30" stroke="#6FAE3C" stroke-width="8" fill="none" stroke-linecap="round"/></svg><b>Кукурудза</b><small></small></a>
+      <a class="tile" href="#contacts" data-crop="Ячмінь"><svg viewBox="0 0 120 86" aria-hidden="true"><rect width="120" height="86" fill="#EFE3BF"/><g stroke="#C9A257" stroke-width="1.5" fill="#D8B66A"><path d="M60 86V28" fill="none"/><ellipse cx="60" cy="26" rx="3.5" ry="7"/><ellipse cx="55" cy="36" rx="3.5" ry="7" transform="rotate(-25 55 36)"/><ellipse cx="65" cy="36" rx="3.5" ry="7" transform="rotate(25 65 36)"/><ellipse cx="55" cy="48" rx="3.5" ry="7" transform="rotate(-25 55 48)"/><ellipse cx="65" cy="48" rx="3.5" ry="7" transform="rotate(25 65 48)"/><path d="M60 20 L58 2 M55 30 L44 10 M65 30 L76 10 M55 42 L40 26 M65 42 L80 26" fill="none"/></g></svg><b>Ячмінь</b><small></small></a>
+      <a class="tile" href="#contacts" data-crop="Ріпак"><svg viewBox="0 0 120 86" aria-hidden="true"><rect width="120" height="86" fill="#DCEBC2"/><g stroke="#5E9A32" stroke-width="3"><path d="M30 86V40M60 86V30M90 86V44"/></g><g fill="#F4D21E"><circle cx="30" cy="36" r="9"/><circle cx="22" cy="44" r="6"/><circle cx="60" cy="26" r="10"/><circle cx="70" cy="34" r="7"/><circle cx="52" cy="36" r="6"/><circle cx="90" cy="40" r="9"/><circle cx="98" cy="48" r="6"/></g></svg><b>Ріпак</b><small></small></a>
+      <a class="tile" href="#contacts" data-crop="Соя"><svg viewBox="0 0 120 86" aria-hidden="true"><rect width="120" height="86" fill="#EADBB8"/><g fill="#E4C48A" stroke="#C9A06A" stroke-width="1.5"><circle cx="30" cy="30" r="12"/><circle cx="56" cy="24" r="12"/><circle cx="82" cy="30" r="12"/><circle cx="42" cy="54" r="12"/><circle cx="68" cy="52" r="12"/><circle cx="94" cy="56" r="12"/><circle cx="20" cy="66" r="12"/></g></svg><b>Соя</b><small></small></a>
+      <a class="tile" href="#contacts" data-crop="Горох"><svg viewBox="0 0 120 86" aria-hidden="true"><rect width="120" height="86" fill="#CFE6BC"/><path d="M14 60 C 30 30 80 20 108 36 C 90 56 40 70 14 60 Z" fill="#5FA83A"/><g fill="#8CCB5E"><circle cx="36" cy="50" r="8"/><circle cx="54" cy="45" r="8"/><circle cx="72" cy="41" r="8"/><circle cx="90" cy="39" r="7"/></g></svg><b>Горох</b><small></small></a>
+    </div>
+  </div>
+  <div class="dcard dcard--fleet" id="fleet"><h3>Наш автопарк</h3><p>Сучасна техніка для надійних перевезень</p><a class="btn btn--line" href="#services">Детальніше</a></div>
+  <div class="dcard dcard--port" id="port">
+    <svg class="art" viewBox="0 0 420 200" aria-hidden="true"><rect width="420" height="200" fill="#2B3A44"/><rect y="150" width="420" height="50" fill="#22323C"/><g fill="#9AA6AE"><rect x="200" y="50" width="34" height="100" rx="4"/><rect x="240" y="40" width="34" height="110" rx="4"/><rect x="280" y="50" width="34" height="100" rx="4"/><rect x="320" y="60" width="34" height="90" rx="4"/></g><g fill="#7D8A93"><path d="M200 50 l17 -14 17 14z"/><path d="M240 40 l17 -14 17 14z"/><path d="M280 50 l17 -14 17 14z"/><path d="M320 60 l17 -14 17 14z"/></g><path d="M360 20 v130 M360 30 h40 v20" stroke="#F0B323" stroke-width="5" fill="none"/><path d="M90 150 h120 l-14 26 h-96 z" fill="#B23A2E"/><rect x="120" y="128" width="40" height="22" fill="#E9ECEF"/><path d="M0 176 C 60 170 120 182 200 176 S 340 170 420 178" stroke="#3E5462" stroke-width="3" fill="none"/></svg>
+    <h3>Портові поставки</h3><p>Прямі відправки в порти України та Європи. Найкращі умови та ціни.</p><a class="btn btn--line" href="#contacts">Детальніше</a>
+  </div>
+  <div class="slogan">
+    <p><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 28 C 6 12 16 4 28 4 C 28 18 20 28 6 28 Z" fill="#4C8A2E"/><path d="M6 28 L 20 14" stroke="#fff" stroke-width="1.5"/></svg>Стабільність. Надійність. Партнерство.</p>
+    <span class="logo"><svg viewBox="0 0 48 56" aria-hidden="true"><path d="M24 54 C 24 40 24 26 24 8" stroke="#2D5A27" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M24 50 C 8 46 4 30 6 18 C 18 24 24 36 24 50 Z" fill="#2D5A27"/><path d="M24 50 C 40 46 44 30 42 18 C 30 24 24 36 24 50 Z" fill="#F0B323"/><path d="M24 34 C 14 30 12 18 14 8 C 22 14 25 24 24 34 Z" fill="#4C8A2E"/><path d="M24 34 C 34 30 36 18 34 8 C 26 14 23 24 24 34 Z" fill="#D99B0E"/></svg><span><b>JUST AGRO</b><small>PRIDE</small></span></span>
+  </div>
+</div>
+
+<section class="sec soft" id="about"><div class="wrap two">
+  <div>
+    <h2>Про компанію</h2>
+    <p class="lead">Just Agro Pride закуповує зернові та олійні напряму в господарств і доставляє їх покупцям — від елеватора до порту. [Додайте історію компанії: рік заснування, регіони роботи.]</p>
+    <a class="btn btn--y" href="#contacts">Продати зерно</a>
+  </div>
+  <div class="nums">
+    <div class="num"><b>[N]</b><span>років на ринку</span></div>
+    <div class="num"><b>[N]</b><span>машин в автопарку</span></div>
+    <div class="num"><b>[N] т</b><span>зерна за сезон</span></div>
+  </div>
+</div></section>
+
+<section class="sec" id="services"><div class="wrap">
+  <h2>Що ми робимо</h2>
+  <div class="svc">
+    <div class="sv"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 30V10"/><path d="M16 10c-4-2-5-6-3-9 4 2 5 6 3 9zM16 17c-4-1-7-4-7-8 4 0 7 4 7 8zM16 17c4-1 7-4 7-8-4 0-7 4-7 8z"/></svg><b>Закупівля зерна</b><p>Купуємо з поля, току чи елеватора. Чесна вага та аналіз якості.</p></div>
+    <div class="sv"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h18v14H2zM20 12h6l4 5v5H20"/><circle cx="8" cy="24" r="2.5"/><circle cx="24" cy="24" r="2.5"/></svg><b>Логістика</b><p>Власні зерновози, планування маршрутів, відстеження машин.</p></div>
+    <div class="sv"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="6" r="3"/><path d="M16 9v20M9 14h14M5 20c0 5 5 9 11 9s11-4 11-9"/></svg><b>Поставки в порти</b><p>Відвантаження в порти України та Європи на вигідних умовах.</p></div>
+    <div class="sv"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 14l6-6 5 3 4-2 6 3 7 0M8 8l-3 10 6 6c1 1 3 1 4 0l7-7M14 22l3 3M17 19l3 3"/></svg><b>Партнерам</b><p>Працюємо з посередниками та трейдерами на прозорих умовах.</p></div>
+  </div>
+</div></section>
+
+<section class="sec soft" id="contacts"><div class="wrap contact">
+  <div>
+    <h2>Контакти</h2>
+    <a class="big" href="tel:+380000000000">+380 (XX) XXX-XX-XX</a>
+    <span>[email]</span>
+    <span>[Адреса офісу]</span>
+    <span>Пн–Сб, 8:00–20:00</span>
+  </div>
+  <form id="f">
+    <h3>Залишити заявку</h3>
+    <label>Ім'я<input required></label>
+    <label>Телефон<input type="tel" placeholder="+380" required></label>
+    <label>Культура<select id="fc"><option>Пшениця</option><option>Кукурудза</option><option>Ячмінь</option><option>Ріпак</option><option>Соя</option><option>Горох</option></select></label>
+    <label>Обсяг, т<input type="number" min="1"></label>
+    <button class="btn btn--y" type="submit">Надіслати</button>
+    <div class="ok" id="ok">Дякуємо! Це тестовий сайт: форма ще не підключена. Будь ласка, зателефонуйте нам.</div>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="logo"><span><b>JUST AGRO</b><small>PRIDE</small></span></span>
+  <nav><a href="./">Сайт 1</a><a href="v2.html">Сайт 2</a><a href="v3.html">Сайт 3</a></nav>
+  <span>© 2026 Just Agro Pride</span>
+</div></footer>
+
+<script>
+document.querySelectorAll('.tile').forEach(function (t) { t.addEventListener('click', function () { document.getElementById('fc').value = t.getAttribute('data-crop'); }); });
+document.getElementById('f').addEventListener('submit', function (e) { e.preventDefault(); document.getElementById('ok').style.display = 'block'; });
+</script>
+</body>
+</html>
