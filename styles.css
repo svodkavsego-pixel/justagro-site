@@ -186,3 +186,43 @@ button.btn { border: 0; cursor: pointer; font-family: Montserrat, system-ui, san
 .form .btn { margin-top: 8px; }
 
 [hidden] { display: none !important; }
+
+/* ---------- варіанти поставки ---------- */
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 8px; }
+.block .h2-left { text-align: left; margin-bottom: 28px; }
+.delivery { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; }
+.delivery__opts { flex: 3 1 480px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.opt { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px; }
+.opt h3 { margin: 0; font-size: 22px; }
+.opt p { margin: 0; }
+.opt__icon { width: 48px; height: 48px; color: var(--gold-text); }
+.more { margin-top: auto; padding-top: 6px; color: var(--gold-text); font-weight: 700; text-decoration: none; }
+.more:hover { text-decoration: underline; }
+.delivery__art { flex: 2 1 320px; width: 100%; height: auto; display: block; border-radius: 22px; }
+.art__sky { fill: var(--card); }
+.art__sun { fill: var(--gold); opacity: .55; }
+.art__field { fill: var(--gold); opacity: .85; }
+.art__row { fill: none; stroke: var(--on-gold); stroke-opacity: .25; stroke-width: 3; }
+.art__body, .art__cab { fill: var(--text); }
+.art__glass { fill: var(--card); }
+.art__grain { fill: var(--gold); }
+.art__wheel { fill: var(--text); stroke: var(--card); stroke-width: 5; }
+.art__text { fill: var(--gold); font: 800 22px Montserrat, sans-serif; letter-spacing: .04em; }
+
+/* ---------- прийомки ---------- */
+.points { display: flex; flex-wrap: wrap; gap: 28px; align-items: stretch; }
+.points__text { flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.points__text .h2-left { margin-bottom: 0; }
+.points__text p { margin: 0; }
+.points__list { list-style: none; margin: 6px 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.points__list li { display: flex; gap: 14px; align-items: flex-start; }
+.pin { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--gold); color: var(--on-gold); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.points__map { flex: 2 1 460px; min-height: 380px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--card); display: flex; align-items: center; justify-content: center; color: var(--faint); z-index: 0; }
+.points__map.leaflet-container { display: block; }
+.pin-icon span {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  background: #D4A945; color: #0F0E0C; font: 800 16px Montserrat, sans-serif;
+  border: 3px solid #0F0E0C; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-sizing: border-box;
+}
+.pin-icon span { line-height: 1; }
+.leaflet-popup-content { font: 500 15px Montserrat, sans-serif; }
