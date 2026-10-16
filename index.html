@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
   <header class="top">
@@ -61,7 +61,12 @@
       <div class="wrap block">
         <h2>Що купуємо</h2>
         <ul class="crops__list">
-          <li><a class="crop" href="#prices" data-crop="Пшениця">Пшениця <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Кукурудза">Кукурудза <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Соняшник">Соняшник <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Соя">Соя <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Ячмінь">Ячмінь <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Ріпак">Ріпак <span aria-hidden="true">→</span></a></li>
+          <li><button type="button" class="crop" data-crop="Пшениця"><span class="crop__name">Пшениця</span><span class="crop__more">Дивитися ціну <span aria-hidden="true">→</span></span></button></li>
+          <li><button type="button" class="crop" data-crop="Кукурудза"><span class="crop__name">Кукурудза</span><span class="crop__more">Дивитися ціну <span aria-hidden="true">→</span></span></button></li>
+          <li><button type="button" class="crop" data-crop="Соняшник"><span class="crop__name">Соняшник</span><span class="crop__more">Дивитися ціну <span aria-hidden="true">→</span></span></button></li>
+          <li><button type="button" class="crop" data-crop="Соя"><span class="crop__name">Соя</span><span class="crop__more">Дивитися ціну <span aria-hidden="true">→</span></span></button></li>
+          <li><button type="button" class="crop" data-crop="Ячмінь"><span class="crop__name">Ячмінь</span><span class="crop__more">Дивитися ціну <span aria-hidden="true">→</span></span></button></li>
+          <li><button type="button" class="crop" data-crop="Ріпак"><span class="crop__name">Ріпак</span><span class="crop__more">Дивитися ціну <span aria-hidden="true">→</span></span></button></li>
         </ul>
         <p class="center"><a class="btn btn--line" href="#prices">Подивитися ціни</a></p>
       </div>
@@ -246,7 +251,7 @@
 
       var pages = ['home', 'prices', 'track', 'about', 'contacts'];
       var picked = null;
-      document.querySelectorAll('.crop').forEach(function (a) { a.addEventListener('click', function () { picked = a.getAttribute('data-crop'); }); });
+      document.querySelectorAll('.crop').forEach(function (a) { a.addEventListener('click', function () { picked = a.getAttribute('data-crop'); location.hash = '#prices'; }); });
       document.querySelectorAll('.prices a[href="#contacts"]').forEach(function (a) { a.addEventListener('click', function () { var f = document.getElementById('fCrop'); f.value = a.closest('tr').cells[0].textContent + ', '; }); });
       function show() {
         var id = (location.hash || '#home').slice(1);
