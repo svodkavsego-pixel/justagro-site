@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
   <header class="top">
@@ -292,7 +292,7 @@
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap' }).addTo(map);
       var all = [];
       pts.forEach(function (p) {
-        var icon = L.divIcon({ className: 'pin-icon', html: '<span>' + p.n + '</span>', iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -34] });
+        var icon = L.divIcon({ className: 'pin-icon', html: '<span><b>' + p.n + '</b></span>', iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -34] });
         L.marker(p.ll, { icon: icon }).addTo(map).bindPopup('<b>' + p.name + '</b><br>' + p.addr);
         all.push(p.ll);
       });
