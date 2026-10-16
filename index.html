@@ -11,7 +11,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <header class="top">
@@ -60,7 +60,7 @@
       <div class="wrap block">
         <h2>Що купуємо</h2>
         <ul class="crops__list">
-          <li>Пшениця</li><li>Кукурудза</li><li>Соняшник</li><li>Соя</li><li>Ячмінь</li><li>Ріпак</li>
+          <li><a class="crop" href="#prices" data-crop="Пшениця">Пшениця <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Кукурудза">Кукурудза <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Соняшник">Соняшник <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Соя">Соя <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Ячмінь">Ячмінь <span aria-hidden="true">→</span></a></li><li><a class="crop" href="#prices" data-crop="Ріпак">Ріпак <span aria-hidden="true">→</span></a></li>
         </ul>
         <p class="center"><a class="btn btn--line" href="#prices">Подивитися ціни</a></p>
       </div>
@@ -85,13 +85,13 @@
           <table class="prices">
             <thead><tr><th>Культура</th><th>Показники</th><th>Ціна, ₴/т</th><th></th></tr></thead>
             <tbody>
-              <tr><td>Пшениця 2 клас</td><td>протеїн від 12,5%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
-              <tr><td>Пшениця 3 клас</td><td>протеїн від 11%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
-              <tr><td>Кукурудза</td><td>вологість до 14%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
-              <tr><td>Ячмінь</td><td>фуражний</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
-              <tr><td>Соняшник</td><td>олійність від 48%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
-              <tr><td>Соя</td><td>протеїн від 34%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
-              <tr><td>Ріпак</td><td>ГМО / без ГМО</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Пшениця"><td>Пшениця 2 клас</td><td>протеїн від 12,5%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Пшениця"><td>Пшениця 3 клас</td><td>протеїн від 11%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Кукурудза"><td>Кукурудза</td><td>вологість до 14%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Ячмінь"><td>Ячмінь</td><td>фуражний</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Соняшник"><td>Соняшник</td><td>олійність від 48%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Соя"><td>Соя</td><td>протеїн від 34%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr data-crop="Ріпак"><td>Ріпак</td><td>ГМО / без ГМО</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -192,6 +192,9 @@
       syncTheme();
 
       var pages = ['home', 'prices', 'track', 'about', 'contacts'];
+      var picked = null;
+      document.querySelectorAll('.crop').forEach(function (a) { a.addEventListener('click', function () { picked = a.getAttribute('data-crop'); }); });
+      document.querySelectorAll('.prices a[href="#contacts"]').forEach(function (a) { a.addEventListener('click', function () { var f = document.getElementById('fCrop'); f.value = a.closest('tr').cells[0].textContent + ', '; }); });
       function show() {
         var id = (location.hash || '#home').slice(1);
         if (pages.indexOf(id) < 0) id = 'home';
@@ -202,6 +205,10 @@
           if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
         });
         window.scrollTo(0, 0);
+        document.querySelectorAll('.prices tr[data-crop]').forEach(function (r) { r.classList.toggle('is-hl', id === 'prices' && r.getAttribute('data-crop') === picked); });
+        var hl = document.querySelector('.prices tr.is-hl');
+        if (hl) hl.scrollIntoView({ block: 'center' });
+        if (id !== 'prices') picked = null;
       }
       window.addEventListener('hashchange', show);
       show();
