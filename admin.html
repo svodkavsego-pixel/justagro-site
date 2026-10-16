@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Адмінка JustAgro</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
+<style>
+:root { --gold: #D4A945; --gold-d: #B58A2B; --ink: #17140F; --mut: #6B6255; --line: #E4DCCB; --bg: #F6F3EC; --card: #fff; --ok: #2E7D4F; --err: #B3261E; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 500 15px/1.5 Montserrat, system-ui, sans-serif; }
+.top { background: var(--ink); color: #fff; position: sticky; top: 0; z-index: 10; }
+.top .in { max-width: 1040px; margin: 0 auto; padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.top h1 { margin: 0; font-size: 18px; flex: 1; display: flex; align-items: center; gap: 10px; }
+.top h1 svg { width: 26px; height: 30px; color: var(--gold); }
+.top h1 small { color: #B9B1A2; font-weight: 600; font-size: 13px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 10px; border: 0; font: 700 14px Montserrat, sans-serif; cursor: pointer; text-decoration: none; }
+.btn--gold { background: var(--gold); color: var(--ink); }
+.btn--gold:hover { background: var(--gold-d); }
+.btn--ghost { background: transparent; color: inherit; border: 1px solid currentColor; }
+.btn--soft { background: var(--bg); color: var(--ink); border: 1px solid var(--line); }
+.btn--del { background: none; border: 0; color: var(--err); cursor: pointer; font: 700 20px Montserrat, sans-serif; padding: 4px 8px; }
+.btn:disabled { opacity: .5; cursor: default; }
+main { max-width: 1040px; margin: 0 auto; padding: 24px 20px 80px; display: flex; flex-direction: column; gap: 18px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.card h2 { margin: 0 0 4px; font-size: 19px; }
+.card > p { margin: 0 0 16px; color: var(--mut); font-size: 13px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.full { grid-column: 1 / -1; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--mut); }
+input, textarea, select { font: 500 15px Montserrat, sans-serif; color: var(--ink); padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; width: 100%; }
+textarea { min-height: 74px; resize: vertical; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+.rows { display: flex; flex-direction: column; gap: 8px; }
+.row { display: grid; gap: 8px; align-items: center; }
+.row--price { grid-template-columns: 1.3fr 1.3fr 0.8fr 1fr auto; }
+.row--point { grid-template-columns: 1.3fr 1.6fr 0.7fr 0.7fr auto; }
+.row--feat { grid-template-columns: 1fr 2fr auto; }
+.head { font-size: 12px; font-weight: 700; color: var(--mut); text-transform: uppercase; letter-spacing: .05em; }
+.add { margin-top: 10px; }
+.check { flex-direction: row; align-items: center; gap: 10px; color: var(--ink); font-weight: 600; }
+.check input { width: 18px; height: 18px; }
+.status { padding: 12px 14px; border-radius: 10px; font-weight: 600; font-size: 14px; display: none; }
+.status.ok { display: block; background: #E5F3EA; color: var(--ok); }
+.status.err { display: block; background: #FBE9E7; color: var(--err); }
+.status.info { display: block; background: #FBF4E2; color: #7A5A12; }
+.help { font-size: 13px; color: var(--mut); }
+.help ol { margin: 6px 0 0; padding-left: 20px; }
+.help a { color: var(--gold-d); font-weight: 700; }
+.token { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.token label { flex: 1 1 320px; }
+.swatch { display: flex; gap: 10px; align-items: center; }
+.swatch input[type=color] { width: 54px; height: 44px; padding: 4px; }
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+  .row--price, .row--point, .row--feat { grid-template-columns: 1fr 1fr; }
+  .row .btn--del { justify-self: end; }
+  .head { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <h1><svg viewBox="0 0 64 72" fill="currentColor" aria-hidden="true"><path d="M32 3 L60 19 V53 L32 69 L4 53 V19 Z" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/><path d="M32 61 V23" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><ellipse cx="32" cy="17" rx="3.6" ry="6.4"/><ellipse cx="26.6" cy="29" rx="3.5" ry="6.6" transform="rotate(-35 26.6 29)"/><ellipse cx="37.4" cy="29" rx="3.5" ry="6.6" transform="rotate(35 37.4 29)"/><ellipse cx="26.2" cy="39.5" rx="3.7" ry="7" transform="rotate(-35 26.2 39.5)"/><ellipse cx="37.8" cy="39.5" rx="3.7" ry="7" transform="rotate(35 37.8 39.5)"/><ellipse cx="25.8" cy="50" rx="3.8" ry="7.2" transform="rotate(-35 25.8 50)"/><ellipse cx="38.2" cy="50" rx="3.8" ry="7.2" transform="rotate(35 38.2 50)"/></svg>Адмінка JustAgro <small>Сайт 1</small></h1>
+  <button class="btn btn--ghost" type="button" id="btnPreview">Попередній перегляд ↗</button>
+  <button class="btn btn--gold" type="button" id="btnPublish">Опублікувати на сайті</button>
+</div></header>
+
+<main>
+  <div class="status" id="status" role="status"></div>
+
+  <section class="card">
+    <h2>Підключення до GitHub</h2>
+    <p>Потрібно один раз, щоб адмінка могла зберігати зміни на сайт.</p>
+    <div class="token">
+      <label>Ключ доступу GitHub (token)
+        <input type="password" id="token" autocomplete="off" placeholder="github_pat_…">
+      </label>
+      <label class="check"><input type="checkbox" id="remember"> Запам'ятати на цьому комп'ютері</label>
+      <button class="btn btn--soft" type="button" id="btnCheck">Перевірити</button>
+    </div>
+    <details class="help" style="margin-top:12px">
+      <summary>Як отримати ключ (2 хвилини)</summary>
+      <ol>
+        <li>Відкрийте <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Fine-grained token</a>.</li>
+        <li>Token name: <b>JustAgro admin</b>, Expiration: на ваш вибір.</li>
+        <li>Repository access → <b>Only select repositories</b> → <b>justagro-site</b>.</li>
+        <li>Permissions → Repository permissions → <b>Contents: Read and write</b>.</li>
+        <li>Натисніть <b>Generate token</b>, скопіюйте його і вставте в поле вище.</li>
+      </ol>
+      Ключ дає доступ лише до цього сайту. Нікому його не пересилайте.
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Контакти</h2>
+    <p>Телефон підставляється в усі кнопки «Подзвонити».</p>
+    <div class="grid">
+      <label>Телефон<input id="phone" placeholder="+380 (67) 123-45-67"></label>
+      <label>Години роботи<input id="hours" placeholder="Пн–Сб, 8:00–20:00"></label>
+      <label>Email<input id="email" type="text"></label>
+      <label>Адреса офісу<input id="address"></label>
+      <label>Viber (номер)<input id="viber" placeholder="+380671234567"></label>
+      <label>Telegram (нік без @)<input id="telegram" placeholder="justagro"></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Головний екран</h2>
+    <p>Новий рядок у заголовку — клавіша Enter.</p>
+    <div class="grid">
+      <label class="full">Заголовок<textarea id="hero_title"></textarea></label>
+      <label class="full">Підзаголовок<textarea id="hero_text"></textarea></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Ціни закупівлі</h2>
+    <p>«Група» — до якої кнопки на головній відноситься рядок (Пшениця, Кукурудза, Соняшник, Соя, Ячмінь, Ріпак).</p>
+    <label style="max-width:320px;margin-bottom:14px">Дата оновлення<input id="prices_date" placeholder="16.10.2026"></label>
+    <div class="row row--price head"><span>Культура</span><span>Показники</span><span>Ціна, ₴/т</span><span>Група</span><span></span></div>
+    <div class="rows" id="prices"></div>
+    <button class="btn btn--soft add" type="button" id="addPrice">+ Додати культуру</button>
+  </section>
+
+  <section class="card">
+    <h2>Прийомки на карті</h2>
+    <p>Координати: у Google Maps натисніть правою кнопкою на місце — перші два числа і є широта та довгота.</p>
+    <div class="row row--point head"><span>Назва</span><span>Адреса</span><span>Широта</span><span>Довгота</span><span></span></div>
+    <div class="rows" id="points"></div>
+    <button class="btn btn--soft add" type="button" id="addPoint">+ Додати прийомку</button>
+  </section>
+
+  <section class="card">
+    <h2>Про нас</h2>
+    <p>Текст сторінки «Про нас» і три переваги під ним.</p>
+    <label>Опис компанії<textarea id="about" style="min-height:100px"></textarea></label>
+    <div class="row row--feat head" style="margin-top:14px"><span>Заголовок</span><span>Текст</span><span></span></div>
+    <div class="rows" id="features"></div>
+  </section>
+
+  <section class="card">
+    <h2>Вигляд сайту</h2>
+    <p>Колір кнопок і акцентів, тема за замовчуванням.</p>
+    <div class="grid">
+      <label>Акцентний колір
+        <span class="swatch"><input type="color" id="accent"><button class="btn btn--soft" type="button" id="accentReset">Золотий за замовчуванням</button></span>
+      </label>
+      <label>Тема для нових відвідувачів
+        <select id="default_theme"><option value="dark">Темна</option><option value="light">Світла</option></select>
+      </label>
+      <label class="check full"><input type="checkbox" id="show_track"> Показувати вкладку «Де машина»</label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Резервна копія</h2>
+    <p>Можна скачати всі налаштування файлом і завантажити назад.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn--soft" type="button" id="btnDownload">Скачати content.json</button>
+      <label class="btn btn--soft" style="flex-direction:row;color:var(--ink)">Завантажити файл<input type="file" id="fileIn" accept=".json,application/json" hidden></label>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var OWNER = 'svodkavsego-pixel', REPO = 'justagro-site', PATH = 'content.json', BRANCH = 'main';
+  var DEFAULT_ACCENT = '#D4A945';
+  var data = null;
+  function $(id) { return document.getElementById(id); }
+  function status(msg, kind) { var s = $('status'); s.className = 'status ' + kind; s.textContent = msg; s.scrollIntoView({ block: 'nearest' }); }
+
+  // token
+  try { var saved = localStorage.getItem('ja_token'); if (saved) { $('token').value = saved; $('remember').checked = true; } } catch (e) {}
+  function token() { return $('token').value.trim(); }
+  function saveToken() { try { if ($('remember').checked && token()) localStorage.setItem('ja_token', token()); else localStorage.removeItem('ja_token'); } catch (e) {} }
+  $('remember').addEventListener('change', saveToken);
+
+  // rows
+  function input(v, ph, type) { var i = document.createElement('input'); i.value = v == null ? '' : v; if (ph) i.placeholder = ph; if (type) { i.type = type; i.step = 'any'; } return i; }
+  function del(row) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn--del'; b.textContent = '×'; b.setAttribute('aria-label', 'Видалити рядок'); b.onclick = function () { row.remove(); }; return b; }
+  function addPrice(p) {
+    p = p || {}; var r = document.createElement('div'); r.className = 'row row--price';
+    [input(p.name, 'Культура'), input(p.spec, 'Показники'), input(p.price, 'Ціна'), input(p.group, 'Група')].forEach(function (i) { r.appendChild(i); });
+    r.appendChild(del(r)); $('prices').appendChild(r);
+  }
+  function addPoint(p) {
+    p = p || {}; var r = document.createElement('div'); r.className = 'row row--point';
+    [input(p.name, 'Назва'), input(p.addr, 'Адреса'), input(p.lat, '51.49', 'number'), input(p.lng, '31.28', 'number')].forEach(function (i) { r.appendChild(i); });
+    r.appendChild(del(r)); $('points').appendChild(r);
+  }
+  function addFeat(f) {
+    f = f || {}; var r = document.createElement('div'); r.className = 'row row--feat';
+    [input(f.title, 'Заголовок'), input(f.text, 'Текст')].forEach(function (i) { r.appendChild(i); });
+    r.appendChild(document.createElement('span')); $('features').appendChild(r);
+  }
+  $('addPrice').onclick = function () { addPrice(); };
+  $('addPoint').onclick = function () { addPoint(); };
+
+  var FIELDS = ['phone', 'hours', 'email', 'address', 'viber', 'telegram', 'hero_title', 'hero_text', 'prices_date', 'about', 'default_theme'];
+  function fill(c) {
+    data = c;
+    FIELDS.forEach(function (k) { $(k).value = c[k] == null ? '' : c[k]; });
+    $('accent').value = /^#[0-9a-f]{6}$/i.test(c.accent || '') ? c.accent : DEFAULT_ACCENT;
+    $('show_track').checked = c.show_track !== false;
+    $('prices').innerHTML = ''; (c.prices || []).forEach(addPrice);
+    $('points').innerHTML = ''; (c.points || []).forEach(addPoint);
+    $('features').innerHTML = ''; var fs = c.features || []; for (var i = 0; i < 3; i++) addFeat(fs[i]);
+  }
+  function collect() {
+    var c = {};
+    FIELDS.forEach(function (k) { c[k] = $(k).value.trim(); });
+    c.accent = $('accent').value; c.show_track = $('show_track').checked;
+    c.prices = [].map.call($('prices').children, function (r) { var v = r.querySelectorAll('input'); return { name: v[0].value.trim(), spec: v[1].value.trim(), price: v[2].value.trim(), group: v[3].value.trim() || v[0].value.trim() }; }).filter(function (p) { return p.name; });
+    c.points = [].map.call($('points').children, function (r) { var v = r.querySelectorAll('input'); return { name: v[0].value.trim(), addr: v[1].value.trim(), lat: parseFloat(v[2].value), lng: parseFloat(v[3].value) }; }).filter(function (p) { return p.name; });
+    c.features = [].map.call($('features').children, function (r) { var v = r.querySelectorAll('input'); return { title: v[0].value.trim(), text: v[1].value.trim() }; }).filter(function (f) { return f.title; });
+    return c;
+  }
+  $('accentReset').onclick = function () { $('accent').value = DEFAULT_ACCENT; };
+
+  fetch('content.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(fill)
+    .catch(function () { status('Не вдалося завантажити content.json. Оновіть сторінку.', 'err'); });
+
+  // preview
+  $('btnPreview').onclick = function () {
+    try { localStorage.setItem('ja_preview', JSON.stringify(collect())); } catch (e) {}
+    window.open('./?preview=1#home', '_blank');
+  };
+
+  // GitHub API
+  function api(method, body) {
+    return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + PATH + (method === 'GET' ? '?ref=' + BRANCH + '&t=' + Date.now() : ''), {
+      method: method,
+      headers: { 'Authorization': 'Bearer ' + token(), 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' },
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, status: r.status, json: j }; }); });
+  }
+  function b64(str) { var bytes = new TextEncoder().encode(str), bin = ''; for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]); return btoa(bin); }
+  function why(res) {
+    if (res.status === 401) return 'Ключ недійсний або прострочений.';
+    if (res.status === 403 || res.status === 404) return 'У ключа немає доступу до сховища justagro-site (потрібно Contents: Read and write).';
+    return (res.json && res.json.message) || ('Помилка ' + res.status);
+  }
+  $('btnCheck').onclick = function () {
+    if (!token()) return status('Вставте ключ доступу.', 'err');
+    saveToken(); status('Перевіряю…', 'info');
+    api('GET').then(function (res) { res.ok ? status('Підключення працює. Можна публікувати зміни.', 'ok') : status(why(res), 'err'); })
+      .catch(function () { status('Немає зʼєднання з GitHub.', 'err'); });
+  };
+  $('btnPublish').onclick = function () {
+    if (!token()) return status('Спочатку вставте ключ доступу GitHub у розділі «Підключення».', 'err');
+    saveToken();
+    var btn = this; btn.disabled = true; status('Публікую…', 'info');
+    var c = collect();
+    api('GET').then(function (cur) {
+      if (!cur.ok) throw cur;
+      return api('PUT', { message: 'Оновлення вмісту сайту з адмінки', content: b64(JSON.stringify(c, null, 2) + '\n'), sha: cur.json.sha, branch: BRANCH });
+    }).then(function (res) {
+      if (!res.ok) throw res;
+      data = c; status('Готово! Зміни опубліковано. Сайт оновиться приблизно за 1 хвилину.', 'ok');
+    }).catch(function (res) { status(res && res.status ? why(res) : 'Немає зʼєднання з GitHub.', 'err'); })
+      .then(function () { btn.disabled = false; });
+  };
+
+  // backup
+  $('btnDownload').onclick = function () {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(collect(), null, 2)], { type: 'application/json' }));
+    a.download = 'content.json'; a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  };
+  $('fileIn').onchange = function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    f.text().then(function (t) { fill(JSON.parse(t)); status('Файл завантажено. Натисніть «Опублікувати», щоб зберегти на сайті.', 'info'); })
+      .catch(function () { status('Це не схоже на файл налаштувань.', 'err'); });
+  };
+})();
+</script>
+</body>
+</html>
