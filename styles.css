@@ -86,8 +86,36 @@ h1 { margin: 0; font-weight: 800; font-size: clamp(30px, 5vw, 52px); line-height
 .btn--tg { background: #1F6FB0; }
 .btn:hover { filter: brightness(1.08); }
 
-.crops { padding: 48px 20px 72px; }
-.crops h2 { font-size: 32px; margin: 0 0 24px; text-align: center; }
+.foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+  padding-top: 24px; padding-bottom: 32px; border-top: 1px solid var(--line);
+  color: var(--faint); font-size: 15px;
+}
+
+/* ---------- вкладки ---------- */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 4px; padding-bottom: 12px; }
+.tabs__link {
+  padding: 12px 18px; border-radius: 12px; font-weight: 700; font-size: 17px;
+  color: var(--muted); text-decoration: none; border: 1px solid transparent;
+}
+.tabs__link:hover { color: var(--text); border-color: var(--line); }
+.tabs__link.is-active { background: var(--gold); color: var(--on-gold); }
+
+/* ---------- загальні блоки ---------- */
+.block { padding-top: 48px; padding-bottom: 56px; }
+.block h2 { font-size: 32px; margin: 0 0 24px; text-align: center; }
+.page__title { font-size: clamp(30px, 4.4vw, 44px); margin: 0 0 8px; }
+.muted { color: var(--muted); }
+.small { font-size: 15px; }
+.center { text-align: center; margin: 28px 0 0; }
+.lead--left { margin: 8px 0 32px; text-align: left; max-width: 760px; }
+.actions--left { justify-content: flex-start; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+.card h3 { margin: 0 0 8px; font-size: 22px; }
+.card p { margin: 0; }
+.note { margin: 0; font-size: 15px; color: var(--faint); }
+.btn--line { border: 2px solid var(--gold); color: var(--text); }
+
 .crops__list {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
@@ -97,8 +125,55 @@ h1 { margin: 0; font-weight: 800; font-size: clamp(30px, 5vw, 52px); line-height
   padding: 20px; text-align: center; font-weight: 700; font-size: 21px;
 }
 
-.foot {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
-  padding-top: 24px; padding-bottom: 32px; border-top: 1px solid var(--line);
-  color: var(--faint); font-size: 15px;
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.steps li { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 6px; }
+.steps b { font-size: 21px; }
+.steps span:last-child { color: var(--muted); }
+.steps__n { font-size: 34px; font-weight: 800; color: var(--gold-text); line-height: 1; }
+
+/* ---------- ціни ---------- */
+.table-box { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; margin-top: 24px; }
+.prices { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 19px; }
+.prices th { text-align: left; padding: 16px 22px; font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); background: var(--card); }
+.prices td { padding: 18px 22px; border-top: 1px solid var(--line); }
+.prices td:first-child { font-weight: 700; }
+.prices td:nth-child(2) { color: var(--muted); }
+.prices__v { font-weight: 800; color: var(--gold-text); }
+.prices a { color: var(--gold-text); font-weight: 700; }
+.cta { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px; font-size: 21px; }
+
+/* ---------- де машина ---------- */
+.track { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 24px; align-items: flex-start; }
+.track__form { flex: 1 1 320px; display: flex; flex-direction: column; gap: 12px; }
+.track__result { flex: 2 1 420px; display: flex; flex-direction: column; gap: 14px; }
+.track__eta { font-size: 32px; font-weight: 800; color: var(--gold-text); }
+.track__map { width: 100%; height: auto; display: block; }
+.map__bg { fill: var(--bg); }
+.map__road { stroke: var(--line); }
+.map__done { stroke: var(--gold); }
+.map__car { fill: var(--gold); stroke: var(--text); stroke-width: 3; }
+.map__field { fill: var(--text); }
+.map__label { fill: var(--muted); font: 600 14px Montserrat, sans-serif; }
+
+/* ---------- форми ---------- */
+label { font-size: 15px; font-weight: 600; color: var(--muted); }
+input {
+  font: 500 19px Montserrat, system-ui, sans-serif; padding: 15px 16px;
+  background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 12px; width: 100%;
 }
+input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+button.btn { border: 0; cursor: pointer; font-family: Montserrat, system-ui, sans-serif; }
+
+/* ---------- про нас ---------- */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.photo { margin-top: 20px; min-height: 260px; border: 2px dashed var(--line); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--faint); text-align: center; padding: 20px; }
+
+/* ---------- контакти ---------- */
+.contacts { display: flex; flex-wrap: wrap; gap: 32px; }
+.contacts > div { flex: 1 1 320px; display: flex; flex-direction: column; gap: 12px; }
+.contacts__phone { font-size: 30px; font-weight: 800; color: var(--text); text-decoration: none; }
+.form { flex: 1 1 400px; display: flex; flex-direction: column; gap: 10px; }
+.form h2 { text-align: left; font-size: 26px; margin: 0 0 6px; }
+.form .btn { margin-top: 8px; }
+
+[hidden] { display: none !important; }

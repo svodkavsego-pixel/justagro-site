@@ -16,7 +16,7 @@
 <body>
   <header class="top">
     <div class="wrap top__row">
-      <a href="./" class="logo" aria-label="JustAgro — закупівля зерна">
+      <a href="#home" class="logo" aria-label="JustAgro — на головну">
         <svg class="logo__icon" viewBox="0 0 64 72" aria-hidden="true" fill="currentColor"><path d="M32 3 L60 19 V53 L32 69 L4 53 V19 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 61 V23" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="32" cy="17" rx="3.4" ry="6.2"/><ellipse cx="26.6" cy="29" rx="3.3" ry="6.4" transform="rotate(-35 26.6 29)"/><ellipse cx="37.4" cy="29" rx="3.3" ry="6.4" transform="rotate(35 37.4 29)"/><ellipse cx="26.2" cy="39.5" rx="3.5" ry="6.8" transform="rotate(-35 26.2 39.5)"/><ellipse cx="37.8" cy="39.5" rx="3.5" ry="6.8" transform="rotate(35 37.8 39.5)"/><ellipse cx="25.8" cy="50" rx="3.6" ry="7" transform="rotate(-35 25.8 50)"/><ellipse cx="38.2" cy="50" rx="3.6" ry="7" transform="rotate(35 38.2 50)"/></svg>
         <span class="logo__text"><span class="logo__name">JUST <b>AGRO</b></span><span class="logo__tag">Закупівля зерна</span></span>
       </a>
@@ -29,30 +29,147 @@
         <a class="btn btn--gold" href="tel:+380000000000">+380 (XX) XXX-XX-XX</a>
       </div>
     </div>
+    <nav class="wrap tabs" aria-label="Розділи сайту">
+      <a class="tabs__link" href="#home" data-tab="home">Головна</a>
+      <a class="tabs__link" href="#prices" data-tab="prices">Ціни</a>
+      <a class="tabs__link" href="#track" data-tab="track">Де машина</a>
+      <a class="tabs__link" href="#about" data-tab="about">Про нас</a>
+      <a class="tabs__link" href="#contacts" data-tab="contacts">Контакти</a>
+    </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="wrap hero__inner">
-        <div class="logo logo--big" aria-hidden="true">
-          <svg class="logo__icon" viewBox="0 0 64 72" fill="currentColor"><path d="M32 3 L60 19 V53 L32 69 L4 53 V19 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M32 61 V23" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="32" cy="17" rx="3.4" ry="6.2"/><ellipse cx="26.6" cy="29" rx="3.3" ry="6.4" transform="rotate(-35 26.6 29)"/><ellipse cx="37.4" cy="29" rx="3.3" ry="6.4" transform="rotate(35 37.4 29)"/><ellipse cx="26.2" cy="39.5" rx="3.5" ry="6.8" transform="rotate(-35 26.2 39.5)"/><ellipse cx="37.8" cy="39.5" rx="3.5" ry="6.8" transform="rotate(35 37.8 39.5)"/><ellipse cx="25.8" cy="50" rx="3.6" ry="7" transform="rotate(-35 25.8 50)"/><ellipse cx="38.2" cy="50" rx="3.6" ry="7" transform="rotate(35 38.2 50)"/></svg>
-          <span class="logo__text"><span class="logo__name">JUST <b>AGRO</b></span><span class="logo__tag">Закупівля зерна</span></span>
+    <!-- ГОЛОВНА -->
+    <section class="page" id="page-home" data-page="home">
+      <div class="hero">
+        <div class="wrap hero__inner">
+          <div class="logo logo--big" aria-hidden="true">
+            <svg class="logo__icon" viewBox="0 0 64 72" fill="currentColor"><path d="M32 3 L60 19 V53 L32 69 L4 53 V19 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M32 61 V23" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="32" cy="17" rx="3.4" ry="6.2"/><ellipse cx="26.6" cy="29" rx="3.3" ry="6.4" transform="rotate(-35 26.6 29)"/><ellipse cx="37.4" cy="29" rx="3.3" ry="6.4" transform="rotate(35 37.4 29)"/><ellipse cx="26.2" cy="39.5" rx="3.5" ry="6.8" transform="rotate(-35 26.2 39.5)"/><ellipse cx="37.8" cy="39.5" rx="3.5" ry="6.8" transform="rotate(35 37.8 39.5)"/><ellipse cx="25.8" cy="50" rx="3.6" ry="7" transform="rotate(-35 25.8 50)"/><ellipse cx="38.2" cy="50" rx="3.6" ry="7" transform="rotate(35 38.2 50)"/></svg>
+            <span class="logo__text"><span class="logo__name">JUST <b>AGRO</b></span><span class="logo__tag">Закупівля зерна</span></span>
+          </div>
+          <h1>Купуємо ваше зерно.<br>Чесна ціна, швидкий розрахунок.</h1>
+          <p class="lead">Забираємо з поля чи току. Дзвоніть або пишіть, і ми назвемо ціну на вашу партію.</p>
+          <div class="actions">
+            <a class="btn btn--gold btn--big" href="tel:+380000000000">Подзвонити</a>
+            <a class="btn btn--viber btn--big" href="viber://chat?number=%2B380000000000">Viber</a>
+            <a class="btn btn--tg btn--big" href="https://t.me/">Telegram</a>
+          </div>
         </div>
-        <h1>Купуємо ваше зерно.<br>Чесна ціна, швидкий розрахунок.</h1>
-        <p class="lead">Сайт у розробці. Поки що дзвоніть або пишіть, і ми назвемо ціну на вашу партію.</p>
-        <div class="actions">
-          <a class="btn btn--gold btn--big" href="tel:+380000000000">Подзвонити</a>
-          <a class="btn btn--viber btn--big" href="viber://chat?number=%2B380000000000">Viber</a>
-          <a class="btn btn--tg btn--big" href="https://t.me/">Telegram</a>
+      </div>
+
+      <div class="wrap block">
+        <h2>Що купуємо</h2>
+        <ul class="crops__list">
+          <li>Пшениця</li><li>Кукурудза</li><li>Соняшник</li><li>Соя</li><li>Ячмінь</li><li>Ріпак</li>
+        </ul>
+        <p class="center"><a class="btn btn--line" href="#prices">Подивитися ціни</a></p>
+      </div>
+
+      <div class="wrap block">
+        <h2>Як продати зерно</h2>
+        <ol class="steps">
+          <li><span class="steps__n">1</span><b>Дзвінок або заявка</b><span>Скажіть культуру, обсяг і де лежить зерно.</span></li>
+          <li><span class="steps__n">2</span><b>Узгоджуємо ціну</b><span>Фіксуємо ціну по телефону і в договорі.</span></li>
+          <li><span class="steps__n">3</span><b>Приїжджає машина</b><span>Бачите на карті, де водій і коли буде.</span></li>
+          <li><span class="steps__n">4</span><b>Оплата</b><span>На картку або на рахунок, як вам зручно.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ЦІНИ -->
+    <section class="page" id="page-prices" data-page="prices" hidden>
+      <div class="wrap block">
+        <h1 class="page__title">Ціни закупівлі</h1>
+        <p class="muted">Оновлено: [дата]. Ціна в гривнях за тонну. Точна ціна залежить від якості, обсягу і відстані.</p>
+        <div class="table-box">
+          <table class="prices">
+            <thead><tr><th>Культура</th><th>Показники</th><th>Ціна, ₴/т</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>Пшениця 2 клас</td><td>протеїн від 12,5%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr><td>Пшениця 3 клас</td><td>протеїн від 11%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr><td>Кукурудза</td><td>вологість до 14%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr><td>Ячмінь</td><td>фуражний</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr><td>Соняшник</td><td>олійність від 48%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr><td>Соя</td><td>протеїн від 34%</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+              <tr><td>Ріпак</td><td>ГМО / без ГМО</td><td class="prices__v">[ціна]</td><td><a href="#contacts">Продати</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cta">
+          <b>Потрібна ціна на вашу партію?</b>
+          <a class="btn btn--gold" href="tel:+380000000000">Подзвонити</a>
         </div>
       </div>
     </section>
 
-    <section class="wrap crops">
-      <h2>Що купуємо</h2>
-      <ul class="crops__list">
-        <li>Пшениця</li><li>Кукурудза</li><li>Соняшник</li><li>Соя</li><li>Ячмінь</li><li>Ріпак</li>
-      </ul>
+    <!-- ДЕ МАШИНА -->
+    <section class="page" id="page-track" data-page="track" hidden>
+      <div class="wrap block">
+        <h1 class="page__title">Де машина?</h1>
+        <p class="muted">Введіть номер заявки або свій телефон, і побачите, де зараз водій.</p>
+        <div class="track">
+          <form class="track__form card" id="trackForm">
+            <label for="trackInput">Номер заявки або телефону</label>
+            <input id="trackInput" type="text" inputmode="numeric" placeholder="Наприклад, 2417" required>
+            <button type="submit" class="btn btn--gold btn--big">Знайти машину</button>
+            <p class="note">Демо-режим: показуємо приклад. Справжнє відстеження підключимо пізніше.</p>
+          </form>
+          <div class="track__result card" id="trackResult" hidden>
+            <div class="muted small">Заявка №<span id="trackId">2417</span> · Пшениця · 40 т</div>
+            <div class="track__eta">Прибуде через 25 хв</div>
+            <svg class="track__map" viewBox="0 0 480 240" role="img" aria-label="Карта: машина в дорозі до поля">
+              <rect width="480" height="240" rx="14" class="map__bg"/>
+              <path d="M40 200 C 120 190 140 130 220 120 S 340 70 430 50" fill="none" class="map__road" stroke-width="12" stroke-linecap="round"/>
+              <path d="M40 200 C 120 190 140 130 220 120" fill="none" class="map__done" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="220" cy="120" r="14" class="map__car"/>
+              <circle cx="430" cy="50" r="9" class="map__field"/>
+              <text x="380" y="80" class="map__label">ваше поле</text>
+            </svg>
+            <div><b>Водій:</b> [Ім'я] · <b>Авто:</b> АА 0000 АА</div>
+            <a class="btn btn--line" href="tel:+380000000000">Подзвонити водію</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРО НАС -->
+    <section class="page" id="page-about" data-page="about" hidden>
+      <div class="wrap block">
+        <h1 class="page__title">Про компанію</h1>
+        <p class="lead lead--left">JustAgro купує зерно і олійні напряму у фермерів. [Додайте 2–3 речення: з якого року працюєте, де офіс, у яких областях закуповуєте.]</p>
+        <div class="grid3">
+          <div class="card"><h3>Свій транспорт</h3><p class="muted">Подаємо машину самі, перевізника шукати не треба.</p></div>
+          <div class="card"><h3>Чесна вага</h3><p class="muted">Повірені ваги, можна бути присутнім при зважуванні.</p></div>
+          <div class="card"><h3>Офіційний договір</h3><p class="muted">Працюємо з фізособами, ФОП і ТОВ.</p></div>
+        </div>
+        <div class="photo">[Тут буде фото команди, машин або складу]</div>
+      </div>
+    </section>
+
+    <!-- КОНТАКТИ -->
+    <section class="page" id="page-contacts" data-page="contacts" hidden>
+      <div class="wrap block contacts">
+        <div>
+          <h1 class="page__title">Контакти</h1>
+          <a class="contacts__phone" href="tel:+380000000000">+380 (XX) XXX-XX-XX</a>
+          <p class="muted">Пн–Сб, 8:00–20:00<br>[email]<br>[Адреса офісу]</p>
+          <div class="actions actions--left">
+            <a class="btn btn--viber" href="viber://chat?number=%2B380000000000">Viber</a>
+            <a class="btn btn--tg" href="https://t.me/">Telegram</a>
+          </div>
+        </div>
+        <form class="card form" id="leadForm">
+          <h2>Заявка на продаж</h2>
+          <label for="fName">Ім'я</label>
+          <input id="fName" type="text" autocomplete="name" required>
+          <label for="fPhone">Телефон</label>
+          <input id="fPhone" type="tel" autocomplete="tel" placeholder="+380" required>
+          <label for="fCrop">Що продаєте і скільки тонн</label>
+          <input id="fCrop" type="text" placeholder="Пшениця, 60 т">
+          <button type="submit" class="btn btn--gold btn--big">Надіслати заявку</button>
+          <p class="note" id="leadMsg" hidden>Дякуємо! Це тестовий сайт: форма ще не підключена, тому заявка нікуди не надіслана. Будь ласка, зателефонуйте нам.</p>
+        </form>
+      </div>
     </section>
   </main>
 
@@ -65,14 +182,39 @@
     (function () {
       var root = document.documentElement, btn = document.getElementById('themeToggle');
       var label = btn.querySelector('.theme__label');
-      function sync() { label.textContent = root.getAttribute('data-theme') === 'dark' ? 'Світла тема' : 'Темна тема'; }
+      function syncTheme() { label.textContent = root.getAttribute('data-theme') === 'dark' ? 'Світла тема' : 'Темна тема'; }
       btn.addEventListener('click', function () {
         var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
         try { localStorage.setItem('theme', next); } catch (e) {}
-        sync();
+        syncTheme();
       });
-      sync();
+      syncTheme();
+
+      var pages = ['home', 'prices', 'track', 'about', 'contacts'];
+      function show() {
+        var id = (location.hash || '#home').slice(1);
+        if (pages.indexOf(id) < 0) id = 'home';
+        document.querySelectorAll('.page').forEach(function (p) { p.hidden = p.getAttribute('data-page') !== id; });
+        document.querySelectorAll('.tabs__link').forEach(function (a) {
+          var on = a.getAttribute('data-tab') === id;
+          a.classList.toggle('is-active', on);
+          if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+        });
+        window.scrollTo(0, 0);
+      }
+      window.addEventListener('hashchange', show);
+      show();
+
+      document.getElementById('trackForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        document.getElementById('trackId').textContent = document.getElementById('trackInput').value.trim() || '2417';
+        document.getElementById('trackResult').hidden = false;
+      });
+      document.getElementById('leadForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        document.getElementById('leadMsg').hidden = false;
+      });
     })();
   </script>
 </body>
